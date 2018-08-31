@@ -1,14 +1,28 @@
 import data, {
   conditions,
   damageDeckCore,
-  damageDeckCoreTfa,
-  damageDeckRebelTransport,
   pilots,
-  referenceCards,
-  ships,
-  sources,
   upgrades
 } from '.'
+
+const upgradeSlots = [
+  "astromech",
+  "cannon",
+  "configuration",
+  "crew",
+  "device",
+  "force_power",
+  "gunner",
+  "illicit",
+  "missile",
+  "modification",
+  "sensor",
+  "talent",
+  "tech",
+  "title",
+  "torpedo",
+  "turret"
+]
 
 test('data is not null', () => {
   expect(data).toBeDefined()
@@ -36,34 +50,12 @@ test('damageDeckCore can be imported individually', () => {
   expect(damageDeckCore).toBeDefined()
 })
 
-test('damageDeckCore has items', () => {
-  expect(damageDeckCore.length).toBeGreaterThan(0)
+test('damageDeckCore has cards', () => {
+  expect(damageDeckCore.cards).toBeDefined()
 })
 
-// damageDeckCoreTfa
-test('data contains damageDeckCoreTfa', () => {
-  expect(data.damageDeckCoreTfa).toBeDefined()
-})
-
-test('damageDeckCoreTfa can be imported individually', () => {
-  expect(damageDeckCoreTfa).toBeDefined()
-})
-
-test('damageDeckCoreTfa has items', () => {
-  expect(damageDeckCoreTfa.length).toBeGreaterThan(0)
-})
-
-// damageDeckRebelTransport
-test('data contains damageDeckRebelTransport', () => {
-  expect(data.damageDeckRebelTransport).toBeDefined()
-})
-
-test('damageDeckRebelTransport can be imported individually', () => {
-  expect(damageDeckRebelTransport).toBeDefined()
-})
-
-test('damageDeckRebelTransport has items', () => {
-  expect(damageDeckRebelTransport.length).toBeGreaterThan(0)
+test('damageDeckCore.cards has items', () => {
+  expect(damageDeckCore.cards.length).toBeGreaterThan(0)
 })
 
 // pilots
@@ -79,45 +71,6 @@ test('pilots has items', () => {
   expect(pilots.length).toBeGreaterThan(0)
 })
 
-// referenceCards
-test('data contains referenceCards', () => {
-  expect(data.referenceCards).toBeDefined()
-})
-
-test('referenceCards can be imported individually', () => {
-  expect(referenceCards).toBeDefined()
-})
-
-test('referenceCards has items', () => {
-  expect(referenceCards.length).toBeGreaterThan(0)
-})
-
-// ships
-test('data contains ships', () => {
-  expect(data.ships).toBeDefined()
-})
-
-test('ships can be imported individually', () => {
-  expect(ships).toBeDefined()
-})
-
-test('ships has items', () => {
-  expect(ships.length).toBeGreaterThan(0)
-})
-
-// sources
-test('data contains sources', () => {
-  expect(data.sources).toBeDefined()
-})
-
-test('sources can be imported individually', () => {
-  expect(sources).toBeDefined()
-})
-
-test('sources has items', () => {
-  expect(sources.length).toBeGreaterThan(0)
-})
-
 // upgrades
 test('data contains upgrades', () => {
   expect(data.upgrades).toBeDefined()
@@ -127,6 +80,14 @@ test('upgrades can be imported individually', () => {
   expect(upgrades).toBeDefined()
 })
 
-test('upgrades has items', () => {
-  expect(upgrades.length).toBeGreaterThan(0)
+test('upgrades has all slots', () => {
+  for (let slot of upgradeSlots) {
+    expect(upgrades).toHaveProperty(slot);
+  }
+})
+
+test('upgradeslots has items', () => {
+  for (let slot in upgrades) {
+    expect(slot.length).toBeGreaterThan(0);
+  }
 })

@@ -1,33 +1,49 @@
-const conditions = require("../xwing-data/data/conditions.js");
-const damageDeckCore = require("../xwing-data/data/damage-deck-core.js");
-const damageDeckCoreTfa = require("../xwing-data/data/damage-deck-core-tfa.js");
-const damageDeckRebelTransport = require("../xwing-data/data/damage-deck-rebel-transport.js");
-const pilots = require("../xwing-data/data/pilots.js");
-const referenceCards = require("../xwing-data/data/reference-cards.js");
-const ships = require("../xwing-data/data/ships.js");
-const sources = require("../xwing-data/data/sources.js");
-const upgrades = require("../xwing-data/data/upgrades.js");
+const xwingDataPath = "../xwing-data2/";
+const manifest = require(xwingDataPath + "data/manifest.json");
+
+function getUpgrades() {
+  var upgrades = {};
+  
+  for (let upgrade of manifest.upgrades) {
+    let n = upgrade.lastIndexOf('/');
+
+    let upgradeSlot = upgrade.substring(n + 1, upgrade.length - 5);
+
+    upgradeSlot = upgradeSlot.replace('-', '_');
+
+    upgrades[upgradeSlot] = require(xwingDataPath + upgrade);
+  }
+
+  return upgrades;
+}
+
+function getPilots() {
+  var pilots = [];
+
+  for (let faction of manifest.pilots) {
+    for (let ship of faction.ships) {
+      pilots.push(require(xwingDataPath + ship));
+    }
+  }
+
+  return pilots;
+}
+
+const conditions = require(xwingDataPath + manifest.conditions);
+const damageDeckCore = require(xwingDataPath + manifest.damagedecks[0]);
+const pilots = getPilots();
+const upgrades = getUpgrades();
 
 const data = {
   conditions,
   damageDeckCore,
-  damageDeckCoreTfa,
-  damageDeckRebelTransport,
   pilots,
-  referenceCards,
-  ships,
-  sources,
   upgrades
 };
 
 module.exports = {
   conditions,
   damageDeckCore,
-  damageDeckCoreTfa,
-  damageDeckRebelTransport,
   pilots,
-  referenceCards,
-  ships,
-  sources,
   upgrades
 };
