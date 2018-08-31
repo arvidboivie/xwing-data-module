@@ -4,7 +4,7 @@
   "description": "xwing-data packaged as modules",
   "files": [
     "src/index.js",
-    "xwing-data/data"
+    "xwing-data2/data"
   ],
   "scripts": {
     "test": "jest src",
