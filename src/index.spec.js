@@ -60,15 +60,3 @@ test('data contains upgrades', () => {
 test('upgrades can be imported individually', () => {
   expect(upgrades).toBeDefined()
 })
-
-test('upgrades has all slots', () => {
-  for (let upgrade of upgrades) {
-    expect(upgrade).toHaveProperty('slot');
-  }
-})
-
-test('upgradeslots has items', () => {
-  for (let slot in upgrades) {
-    expect(slot.length).toBeGreaterThan(0);
-  }
-})

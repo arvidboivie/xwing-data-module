@@ -5,20 +5,9 @@ function getUpgrades() {
   var upgrades = [];
   
   for (let upgrade of manifest.upgrades) {
-    let n = upgrade.lastIndexOf('/');
-
-    let upgradeSlot = upgrade.substring(n + 1, upgrade.length - 5);
-
-    upgradeSlot = upgradeSlot.replace('-', '_');
-
     let upgradeArray = require(xwingDataPath + upgrade)
-    
-    let upgradesWithSlots = upgradeArray.map((upgrade) => {
-      upgrade.slot = upgradeSlot;
-      return upgrade;
-    });
 
-    upgrades = upgrades.concat(upgradesWithSlots);
+    upgrades = upgrades.concat(upgradeArray);
   }
 
   return upgrades;
