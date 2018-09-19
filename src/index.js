@@ -2,7 +2,7 @@ const xwingDataPath = "../xwing-data2/";
 const manifest = require(xwingDataPath + "data/manifest.json");
 
 function getUpgrades() {
-  var upgrades = {};
+  var upgrades = [];
   
   for (let upgrade of manifest.upgrades) {
     let n = upgrade.lastIndexOf('/');
@@ -11,7 +11,14 @@ function getUpgrades() {
 
     upgradeSlot = upgradeSlot.replace('-', '_');
 
-    upgrades[upgradeSlot] = require(xwingDataPath + upgrade);
+    let upgradeArray = require(xwingDataPath + upgrade)
+    
+    let upgradesWithSlots = upgradeArray.map((upgrade) => {
+      upgrade.slot = upgradeSlot;
+      return upgrade;
+    });
+
+    upgrades = upgrades.concat(upgradesWithSlots);
   }
 
   return upgrades;

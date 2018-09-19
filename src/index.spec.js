@@ -5,25 +5,6 @@ import data, {
   upgrades
 } from '.'
 
-const upgradeSlots = [
-  "astromech",
-  "cannon",
-  "configuration",
-  "crew",
-  "device",
-  "force_power",
-  "gunner",
-  "illicit",
-  "missile",
-  "modification",
-  "sensor",
-  "talent",
-  "tech",
-  "title",
-  "torpedo",
-  "turret"
-]
-
 test('data is not null', () => {
   expect(data).toBeDefined()
 })
@@ -81,8 +62,8 @@ test('upgrades can be imported individually', () => {
 })
 
 test('upgrades has all slots', () => {
-  for (let slot of upgradeSlots) {
-    expect(upgrades).toHaveProperty(slot);
+  for (let upgrade of upgrades) {
+    expect(upgrade).toHaveProperty('slot');
   }
 })
 
